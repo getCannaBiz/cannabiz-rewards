@@ -1,2 +1,3 @@
-# cannabiz-rewards
-Customer loyalty and rewards program
+# CannaBiz Rewards
+
+Dispensary customer loyalty and rewards program
