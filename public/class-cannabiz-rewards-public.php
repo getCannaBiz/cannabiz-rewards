@@ -3,11 +3,12 @@
 /**
  * The public-facing functionality of the plugin.
  *
- * @link       https://cannabiz.pro
- * @since      1.0.0
- *
  * @package    CannaBiz_Rewards
- * @subpackage CannaBiz_Rewards/public
+ * @subpackage CannaBiz_Rewards/admin
+ * @author     CannaBiz Software <hello@cannabiz.pro>
+ * @license    GPL-2.0+ http://www.gnu.org/licenses/gpl-2.0.txt
+ * @link       https://www.deviodigital.com
+ * @since      1.0.0
  */
 
 /**
@@ -17,87 +18,68 @@
  * enqueue the public-facing stylesheet and JavaScript.
  *
  * @package    CannaBiz_Rewards
- * @subpackage CannaBiz_Rewards/public
- * @author     CannaBiz <hello@cannabiz.pro>
+ * @subpackage CannaBiz_Rewards/admin
+ * @author     CannaBiz Software <hello@cannabiz.pro>
+ * @license    GPL-2.0+ http://www.gnu.org/licenses/gpl-2.0.txt
+ * @link       https://www.deviodigital.com
+ * @since      1.0.0
  */
 class CannaBiz_Rewards_Public {
 
-	/**
-	 * The ID of this plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
-	 */
-	private $plugin_name;
+    /**
+     * The ID of this plugin.
+     *
+     * @since  1.0.0
+     * @access private
+     * @var    string  $_plugin_name - The ID of this plugin.
+     */
+    private $_plugin_name;
 
-	/**
-	 * The version of this plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      string    $version    The current version of this plugin.
-	 */
-	private $version;
+    /**
+     * The version of this plugin.
+     *
+     * @since  1.0.0
+     * @access private
+     * @var    string  $_version - The current version of this plugin.
+     */
+    private $_version;
 
-	/**
-	 * Initialize the class and set its properties.
-	 *
-	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of the plugin.
-	 * @param      string    $version    The version of this plugin.
-	 */
-	public function __construct( $plugin_name, $version ) {
+    /**
+     * Initialize the class and set its properties.
+     *
+     * @param string $_plugin_name - The name of the plugin.
+     * @param string $_version     - The version of this plugin.
+     * 
+     * @since 1.0.0
+     */
+    public function __construct( $_plugin_name, $_version ) {
 
-		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+        $this->plugin_name = $_plugin_name;
+        $this->version = $_version;
 
-	}
+    }
 
-	/**
-	 * Register the stylesheets for the public-facing side of the site.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_styles() {
+    /**
+     * Register the stylesheets for the public-facing side of the site.
+     *
+     * @since  1.0.0
+     * @return void
+     */
+    public function enqueue_styles() {
+        // CSS - Public.
+        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/cannabiz-rewards-public.css', array(), $this->version, 'all' );
+    }
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in CannaBiz_Rewards_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The CannaBiz_Rewards_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+    /**
+     * Register the JavaScript for the public-facing side of the site.
+     *
+     * @since  1.0.0
+     * @return void
+     */
+    public function enqueue_scripts() {
+        // JS - Public.
+        wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/cannabiz-rewards-public.js', array( 'jquery' ), $this->version, false );
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/cannabiz-rewards-public.css', array(), $this->version, 'all' );
-
-	}
-
-	/**
-	 * Register the JavaScript for the public-facing side of the site.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_scripts() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in CannaBiz_Rewards_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The CannaBiz_Rewards_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/cannabiz-rewards-public.js', array( 'jquery' ), $this->version, false );
-
-	}
+    }
 
 }

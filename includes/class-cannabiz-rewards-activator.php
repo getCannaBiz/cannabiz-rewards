@@ -3,11 +3,12 @@
 /**
  * Fired during plugin activation
  *
- * @link       https://cannabiz.pro
- * @since      1.0.0
- *
  * @package    CannaBiz_Rewards
  * @subpackage CannaBiz_Rewards/includes
+ * @author     CannaBiz Software <hello@cannabiz.pro>
+ * @license    GPL-2.0+ http://www.gnu.org/licenses/gpl-2.0.txt
+ * @link       https://www.deviodigital.com
+ * @since      1.0.0
  */
 
 /**
@@ -15,22 +16,23 @@
  *
  * This class defines all code necessary to run during the plugin's activation.
  *
- * @since      1.0.0
  * @package    CannaBiz_Rewards
  * @subpackage CannaBiz_Rewards/includes
- * @author     CannaBiz <hello@cannabiz.pro>
+ * @author     CannaBiz Software <hello@cannabiz.pro>
+ * @license    GPL-2.0+ http://www.gnu.org/licenses/gpl-2.0.txt
+ * @link       https://www.deviodigital.com
+ * @since      1.0.0
  */
 class CannaBiz_Rewards_Activator {
 
-	/**
-	 * Short Description. (use period)
-	 *
-	 * Long Description.
-	 *
-	 * @since    1.0.0
-	 */
-	public static function activate() {
+    /**
+     * Activate.
+     *
+     * @since  1.0.0
+     * @return void
+     */
+    public static function activate() {
 
-	}
+    }
 
 }

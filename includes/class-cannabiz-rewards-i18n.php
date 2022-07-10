@@ -6,11 +6,12 @@
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @link       https://cannabiz.pro
- * @since      1.0.0
- *
  * @package    CannaBiz_Rewards
  * @subpackage CannaBiz_Rewards/includes
+ * @author     CannaBiz Software <hello@cannabiz.pro>
+ * @license    GPL-2.0+ http://www.gnu.org/licenses/gpl-2.0.txt
+ * @link       https://www.deviodigital.com
+ * @since      1.0.0
  */
 
 /**
@@ -19,28 +20,31 @@
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @since      1.0.0
  * @package    CannaBiz_Rewards
  * @subpackage CannaBiz_Rewards/includes
- * @author     CannaBiz <hello@cannabiz.pro>
+ * @author     CannaBiz Software <hello@cannabiz.pro>
+ * @license    GPL-2.0+ http://www.gnu.org/licenses/gpl-2.0.txt
+ * @link       https://www.deviodigital.com
+ * @since      1.0.0
  */
 class CannaBiz_Rewards_i18n {
 
 
-	/**
-	 * Load the plugin text domain for translation.
-	 *
-	 * @since    1.0.0
-	 */
-	public function load_plugin_textdomain() {
+    /**
+     * Load the plugin text domain for translation.
+     *
+     * @since  1.0.0
+     * @return void
+     */
+    public function load_plugin_textdomain() {
 
-		load_plugin_textdomain(
-			'cannabiz-rewards',
-			false,
-			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
-		);
+        load_plugin_textdomain(
+            'cannabiz-rewards',
+            false,
+            dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
+        );
 
-	}
+    }
 
 
 

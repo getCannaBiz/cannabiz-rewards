@@ -19,13 +19,14 @@
  * For more information, see the following discussion:
  * https://github.com/tommcfarlin/WordPress-Plugin-Boilerplate/pull/123#issuecomment-28541913
  *
- * @link       https://cannabiz.pro
- * @since      1.0.0
- *
- * @package    CannaBiz_Rewards
+ * @package CannaBiz_Rewards
+ * @author  CannaBiz Software <hello@cannabiz.pro>
+ * @license GPL-2.0+ http://www.gnu.org/licenses/gpl-2.0.txt
+ * @link    https://www.deviodigital.com
+ * @since   1.0.0
  */
 
 // If uninstall not called from WordPress, then exit.
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
-	wp_die();
+    wp_die();
 }
