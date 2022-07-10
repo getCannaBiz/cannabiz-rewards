@@ -133,6 +133,11 @@ class CannaBiz_Rewards {
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-cannabiz-rewards-osa-settings.php';
 
         /**
+         * The file responsible for defining all admin settings.
+         */
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/cannabiz-rewards-admin-settings.php';
+
+        /**
          * The file responsible for defining all user fields.
          */
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/cannabiz-rewards-user-fields.php';
