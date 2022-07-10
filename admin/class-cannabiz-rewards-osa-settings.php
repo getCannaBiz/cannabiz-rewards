@@ -733,6 +733,11 @@ if ( ! class_exists( 'CannaBiz_Rewards_OSA' ) ) :
             );
         }
 
+        /**
+         * Plugin page
+         * 
+         * @return string
+         */
         public function plugin_page() {
             echo '<div class="cannabiz-rewards-admin-settings wrap">';
             echo '<h1>' . esc_attr__( 'Customer Rewards for CannaBiz', 'cannabiz-rewards' ) . ' <span style="font-size:50%;">v' . esc_attr( CANNABIZ_REWARDS_VERSION ) . '</span></h1>';
