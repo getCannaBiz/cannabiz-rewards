@@ -128,6 +128,11 @@ class CannaBiz_Rewards {
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-cannabiz-rewards-admin.php';
 
         /**
+         * The file responsible for defining all user fields.
+         */
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/cannabiz-rewards-user-fields.php';
+
+        /**
          * The class responsible for defining all actions that occur in the 
          * public-facing side of the site.
          */
