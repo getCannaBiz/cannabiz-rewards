@@ -116,13 +116,20 @@ class CannaBiz_Rewards {
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-cannabiz-rewards-i18n.php';
 
         /**
-         * The class responsible for defining all actions that occur in the admin area.
+         * The file responsible for defining all helper functions used throughout
+         * the plugin.
+         */
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/cannabiz-rewards-helper-functions.php';
+
+        /**
+         * The class responsible for defining all actions that occur in the 
+         * admin area.
          */
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-cannabiz-rewards-admin.php';
 
         /**
-         * The class responsible for defining all actions that occur in the public-facing
-         * side of the site.
+         * The class responsible for defining all actions that occur in the 
+         * public-facing side of the site.
          */
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-cannabiz-rewards-public.php';
 
@@ -133,8 +140,8 @@ class CannaBiz_Rewards {
     /**
      * Define the locale for this plugin for internationalization.
      *
-     * Uses the CannaBiz_Rewards_i18n class in order to set the domain and to register the hook
-     * with WordPress.
+     * Uses the CannaBiz_Rewards_i18n class in order to set the domain and to 
+     * register the hook with WordPress.
      *
      * @since  1.0.0
      * @access private
