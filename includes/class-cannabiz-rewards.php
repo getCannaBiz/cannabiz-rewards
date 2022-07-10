@@ -133,6 +133,12 @@ class CannaBiz_Rewards {
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/cannabiz-rewards-user-fields.php';
 
         /**
+         * The file responsible for defining the ways that a customer can earn
+         * loyalty points and rewards.
+         */
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/cannabiz-rewards-earning-loyalty-points.php';
+
+        /**
          * The class responsible for defining all actions that occur in the 
          * public-facing side of the site.
          */
