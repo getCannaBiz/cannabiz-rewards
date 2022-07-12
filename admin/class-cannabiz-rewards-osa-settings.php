@@ -694,6 +694,7 @@ if ( ! class_exists( 'CannaBiz_Rewards_OSA' ) ) :
          * @param string $option  settings field name.
          * @param string $section the section name this field belongs to.
          * @param string $default default text if it's not found.
+         * 
          * @return string
          */
         function get_option( $option, $section, $default = '' ) {
@@ -726,9 +727,9 @@ if ( ! class_exists( 'CannaBiz_Rewards_OSA' ) ) :
             add_submenu_page(
                 'wpd-settings',
                 esc_attr__( 'Customer Rewards for CannaBiz', 'cannabiz-rewards' ),
-                esc_attr__( 'Customer Rewards', 'cannabiz-rewards' ),
+                esc_attr__( 'Rewards', 'cannabiz-rewards' ),
                 'manage_options',
-                'cannabiz_admin_settings',
+                'rewards',
                 array( $this, 'plugin_page' )
             );
         }
@@ -738,14 +739,31 @@ if ( ! class_exists( 'CannaBiz_Rewards_OSA' ) ) :
          * 
          * @return string
          */
-        public function plugin_page() {
-            echo '<div class="cannabiz-rewards-admin-settings wrap">';
-            echo '<h1>' . esc_attr__( 'Customer Rewards for CannaBiz', 'cannabiz-rewards' ) . ' <span style="font-size:50%;">v' . esc_attr( CANNABIZ_REWARDS_VERSION ) . '</span></h1>';
-            echo '<p>' . esc_attr__( 'Brought to you by', 'cannabiz-rewards' ) . ' <a href="https://cannabiz.pro/" target="_blank">CannaBiz Software</a> | <a href="https://docs.cannabiz.pro" target="_blank">' . esc_attr__( 'Documentation', 'cannabiz-rewards' ). '</a></p>';
-            $this->show_navigation();
-            $this->show_forms();
-            echo '</div>';
-        }
+        public function plugin_page() { ?>
+
+            <div class="wrap cannabiz-rewards">
+            <div class="intro-wrap">
+                <div class="intro">
+                    <a href="<?php echo esc_url( 'https://cannabiz.pro/' ); ?>"><img class="dispensary-logo" src="<?php echo esc_url( plugins_url( 'images/logo.png', __FILE__ ) ); ?>" alt="<?php esc_html_e( 'Visit CannaBiz', 'cannabiz-rewards' ); ?>" /></a>
+                    <h3><?php printf( esc_html__( 'CannaBiz', 'cannabiz-rewards' ) ); ?> <strong><?php printf( esc_html__( 'Rewards', 'cannabiz-rewards' ) ); ?></strong></h3>
+                </div>
+            </div>
+    
+            <div class="panels">
+                <div id="panel" class="panel">
+                    <div id="cannabiz-rewards-panel" class="panel-left visible">
+                        <div class="block-feature-wrap clear">
+                            <div class="cannabiz-rewards-charts">
+                            <?php
+                            $this->show_navigation();
+                            $this->show_forms();
+                            ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php }
 
         /**
          * Show navigations as tab

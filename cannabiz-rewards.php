@@ -92,7 +92,7 @@ run_cannabiz_rewards();
  */
 function cannabiz_rewards_settings_link( $links ) {
     // Get Settings link.
-    $settings_link = '<a href="admin.php?page=cannabiz-rewards">' . esc_attr__( 'Settings', 'cannabiz-rewards' ) . '</a>';
+    $settings_link = '<a href="admin.php?page=rewards">' . esc_attr__( 'Settings', 'cannabiz-rewards' ) . '</a>';
     // Add Settings link.
     array_unshift( $links, $settings_link );
 

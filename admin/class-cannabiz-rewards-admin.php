@@ -67,7 +67,7 @@ class CannaBiz_Rewards_Admin {
      */
     public function enqueue_styles() {
         // CSS - Admin.
-        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/cannabiz-rewards-admin.css', array(), $this->version, 'all' );
+        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/cannabiz-rewards-admin.min.css', array(), $this->version, 'all' );
     }
 
     /**
@@ -82,3 +82,23 @@ class CannaBiz_Rewards_Admin {
     }
 
 }
+
+/**
+ * Add Rewards link to WP Dispensary toolbar menu
+ * 
+ * @param array $menu 
+ * 
+ * @return string
+ */
+function cannabiz_rewards_toolbar_menu_item( $menu ) {
+    // Add Settings.
+    $menu[] = array(
+        'id'     => 'cannabiz_rewards',
+        'title'  => esc_attr__( 'Rewards', 'cannabiz-rewards' ),
+        'href'   => admin_url() . 'admin.php?page=rewards',
+        'parent' => 'wp_dispensary'
+    );
+
+    return $menu;
+}
+add_filter( 'wp_dispensary_toolbar_menu_items', 'cannabiz_rewards_toolbar_menu_item', 10 );
