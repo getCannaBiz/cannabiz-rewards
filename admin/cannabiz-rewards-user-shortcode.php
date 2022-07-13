@@ -41,7 +41,7 @@ function cannabiz_rewards_dashboard_shortcode() {
 
                 // Coupon args.
                 $coupon_args = array(
-                    'post_title'   => $coupon_code,
+                    'post_title'   => 'Redeemed: ' . $coupon_code,
                     'post_content' => '',
                     'post_status'  => 'publish',
                     'post_author'  => $user_id,
@@ -54,20 +54,11 @@ function cannabiz_rewards_dashboard_shortcode() {
                 // Get newly create coupon's ID #
                 $new_coupon_id = wp_insert_post( $coupon_args );
 
-                /**
-                 * @todo update these meta values based on the WPD Coupons plugin.
-                 */
-
                 // Add custom meta data to the newly created coupon.
-                update_post_meta( $new_coupon_id, 'discount_type', 'fixed_cart' );
-                update_post_meta( $new_coupon_id, 'coupon_amount', $amount );
-                update_post_meta( $new_coupon_id, 'individual_use', 'yes' );
-                update_post_meta( $new_coupon_id, 'product_ids', '' );
-                update_post_meta( $new_coupon_id, 'exclude_product_ids', '' );
-                update_post_meta( $new_coupon_id, 'usage_limit', '1' );
-                update_post_meta( $new_coupon_id, 'expiry_date', '' );
-                update_post_meta( $new_coupon_id, 'apply_before_tax', 'yes' );
-                update_post_meta( $new_coupon_id, 'free_shipping', 'no' );
+                update_post_meta( $new_coupon_id, 'wpd_coupon_type', 'Flat Rate' );
+                update_post_meta( $new_coupon_id, 'wpd_coupon_amount', $amount );
+                update_post_meta( $new_coupon_id, 'wpd_coupon_code', $coupon_code );
+                update_post_meta( $new_coupon_id, 'wpd_coupon_exp', '' );
 
                 // Reduce required points from user's loyalty points.
                 $new_loyalty_points = $loyalty_points - $redeem_points_min;
@@ -75,14 +66,8 @@ function cannabiz_rewards_dashboard_shortcode() {
                 // Update user meta with the updated loyalty points amount.
                 update_user_meta( $user_id, 'cannabiz_loyalty_points', $new_loyalty_points, $loyalty_points );
 
-                /**
-                 * @todo update this to utilize WPD eCommerce codes (look at cart to see how coupon code gets added)
-                 */
-
                 // Apply new coupon to the cart automatically.
-                if ( ! $woocommerce->cart->add_discount( sanitize_text_field( $coupon_code ) ) ) {
-                    wc_print_notices();
-                }
+                $_SESSION['wpd_ecommerce']->add_coupon( $coupon_code, $amount, 'fixed_cart', '' );
 
                 // Redirect to cart when discount applied.
                 wp_safe_redirect( apply_filters( 'cannabiz_redeem_points_redirect_url', wpd_ecommerce_cart_url() ) );
