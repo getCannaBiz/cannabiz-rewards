@@ -48,8 +48,6 @@ add_action( 'user_register', 'cannabiz_customer_registration', 10, 1 );
 /**
  * Add loyalty points on order completion
  * 
- * @todo attach this function to an action hook in the eCommerce add-on
- *
  * @since  1.0.0
  * @return void
  */
@@ -71,13 +69,12 @@ function cannabiz_customer_first_order() {
         update_user_meta( get_current_user_id(), 'cannabiz_loyalty_points', $new_points, $old_points );
     }
 }
+add_action( 'wpd_ecommerce_checkout_success_after', 'cannabiz_customer_first_order', 10 );
 
 /**
  * Add loyalty points for every dollar spent
  *
  * @param int $order_id 
- * 
- * @todo attach this function to an action hook in the eCommerce add-on
  *
  * @since  1.0.0
  * @return void
@@ -115,3 +112,4 @@ function cannabiz_customer_money_spent( $order_id ) {
     }
 
 }
+add_action( 'wpd_ecommerce_checkout_success_after', 'cannabiz_customer_money_spent', 10 );
