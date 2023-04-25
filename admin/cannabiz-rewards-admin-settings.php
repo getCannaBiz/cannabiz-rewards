@@ -204,8 +204,8 @@ if ( class_exists( 'CannaBiz_Rewards_OSA' ) ) {
                 'name'    => esc_attr__( 'Calculation type', 'cannabiz-rewards' ),
                 'desc'    => esc_attr__( 'Should the points be calculated from the order total or subtotal?', 'cannabiz-rewards' ),
                 'options' => array(
-                    'total'   => esc_attr__( 'Order total', 'cannabiz-rewards' ),
-                    'subotal' => esc_attr__( 'Order subtotal', 'cannabiz-rewards' ),
+                    'total'    => esc_attr__( 'Order total', 'cannabiz-rewards' ),
+                    'subtotal' => esc_attr__( 'Order subtotal', 'cannabiz-rewards' ),
                 ),
             )
         );
