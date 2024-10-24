@@ -4,9 +4,9 @@
  *
  * @package    CannaBiz_Rewards
  * @subpackage CannaBiz_Rewards/admin
- * @author     CannaBiz Software <hello@cannabiz.pro>
+ * @author     CannaBiz Software <contact@cannabizsoftware.com>
  * @license    GPL-2.0+ http://www.gnu.org/licenses/gpl-2.0.txt
- * @link       https://cannabiz.pro
+ * @link       https://cannabizsoftware.com
  * @since      1.0.0
  */
 function cannabiz_rewards_dashboard_shortcode() {
@@ -40,13 +40,13 @@ function cannabiz_rewards_dashboard_shortcode() {
                 $amount      = cannabiz_loyalty_points_redeem_points_value(); // Amount.
 
                 // Coupon args.
-                $coupon_args = array(
+                $coupon_args = [
                     'post_title'   => 'Redeemed: ' . $coupon_code,
                     'post_content' => '',
                     'post_status'  => 'publish',
                     'post_author'  => $user_id,
                     'post_type'    => 'coupons'
-                );
+                ];
 
                 // Filter args.
                 $coupon_args = apply_filters( 'cannabiz_redeem_points_coupon_args', $coupon_args, $coupon_code, $user_id );
@@ -59,15 +59,14 @@ function cannabiz_rewards_dashboard_shortcode() {
                 update_post_meta( $new_coupon_id, 'wpd_coupon_amount', $amount );
                 update_post_meta( $new_coupon_id, 'wpd_coupon_code', $coupon_code );
                 update_post_meta( $new_coupon_id, 'wpd_coupon_exp', '' );
+                update_post_meta( $new_coupon_id, 'wpd_coupon_usage_count', 0 );
+                update_post_meta( $new_coupon_id, 'wpd_coupon_usage_limit', 1 );
 
                 // Reduce required points from user's loyalty points.
                 $new_loyalty_points = $loyalty_points - $redeem_points_min;
 
                 // Update user meta with the updated loyalty points amount.
                 update_user_meta( $user_id, 'cannabiz_loyalty_points', $new_loyalty_points, $loyalty_points );
-
-                // Apply new coupon to the cart automatically.
-                $_SESSION['wpd_ecommerce']->add_coupon( $coupon_code, $amount, 'fixed_cart', '' );
 
                 // Redirect to cart when discount applied.
                 wp_safe_redirect( apply_filters( 'cannabiz_redeem_points_redirect_url', wpd_ecommerce_cart_url() ) );
@@ -85,13 +84,13 @@ function cannabiz_rewards_dashboard_shortcode() {
         }
 
         // Coupons args.
-        $args = array(
+        $args = [
             'posts_per_page'   => -1,
             'orderby'          => 'title',
             'order'            => 'asc',
             'post_type'        => 'coupons',
             'post_status'      => 'publish',
-        );
+        ];
 
         // Filter the coupons args.
         $args = apply_filters( 'cannabiz_customer_coupons_args', $args );
@@ -102,21 +101,31 @@ function cannabiz_rewards_dashboard_shortcode() {
         // Loop through coupons.
         foreach ( $customer_coupons as $customer_coupon ) {
             if ( $user_id == $customer_coupon->post_author ) {
+                $coupon_limit = get_post_meta( $customer_coupon->ID, 'wpd_coupon_usage_limit', true );
+                $coupon_count = get_post_meta( $customer_coupon->ID, 'wpd_coupon_usage_count', true );
 
-                /**
-                 * @todo get rid of WooCommerce functionality and replace it with WPD functionality
-                 */
+                if ( ! get_post_meta( $customer_coupon->ID, 'wpd_coupon_usage_limit', true ) ) {
+                    $coupon_limit = 0;
+                }
 
-                // Get coupon object.
-                $coupon = new WC_Coupon( $customer_coupon->post_name );
+                if ( ! get_post_meta( $customer_coupon->ID, 'wpd_coupon_usage_count', true ) ) {
+                    $coupon_count = 0;
+                }
 
                 // Get coupon data.
-                $coupon_data = array(
+                $coupon_data = [
                     'id'          => $customer_coupon->ID,
-                    'usage_limit' => ( ! empty( $customer_coupon->usage_limit ) ) ? $customer_coupon->usage_limit : null,
-                    'usage_count' => (int) $customer_coupon->usage_count,
-                    'amount'      => wc_format_decimal( $coupon->get_amount(), 2 ),
-                );
+                    'type'        => get_post_meta( $customer_coupon->ID, 'wpd_coupon_type', true ) ?: 0,
+                    'usage_limit' => get_post_meta( $customer_coupon->ID, 'wpd_coupon_usage_limit', true ) ?: 0,
+                    'usage_count' => get_post_meta( $customer_coupon->ID, 'wpd_coupon_usage_count', true ) ?: 0,
+                    'amount'      => get_post_meta( $customer_coupon->ID, 'wpd_coupon_amount', true ) ?: 0,
+                ];
+
+                if ( 'Flat Rate' === $coupon_data['type'] ) {
+                    $type = '$' . $coupon_data['amount'] . ' ' . esc_attr__( 'off', 'cannabiz-rewards' );
+                } else {
+                    $type = $coupon_data['amount'] . '% ' . esc_attr__( 'off', 'cannabiz-rewards' );
+                }
 
                 // How many uses are left for this coupon?
                 $usage_left = $coupon_data['usage_limit'] - $coupon_data['usage_count'];
@@ -130,32 +139,8 @@ function cannabiz_rewards_dashboard_shortcode() {
                     $coupon_class     = ' class="cannabiz-rewards-inactive-coupon" ';
                 }
 
-                $coupon_codes .= '<tr><td ' . $coupon_class . '><strong>' . $customer_coupon->post_title . '</strong> - ' . wc_price( $coupon_data['amount'] ) . '</td><td>' . $is_coupon_active . '</td></tr>';
+                $coupon_codes .= '<tr><td ' . $coupon_class . '><strong>' . get_post_meta( $customer_coupon->ID, 'wpd_coupon_code', true ) . '</strong> - ' . $type . '</td><td>' . $is_coupon_active . '</td></tr>';
             }
-        }
-
-        // Display lotalty points if activated in the admin settings.
-        if ( 'on' == cannabiz_loyalty_points_activate() ) {
-            // Table loyalty points.
-            echo '<h4 class="cannabiz-rewards-loyalty-points">' . esc_attr__( 'My Loyalty Points', 'cannabiz-rewards' ) . '</h4>';
-
-            do_action( 'cannabiz_customer_dashboard_loyalty_points_table_before' );
-
-            echo '<table class="cannabiz-rewards-dashboard">';
-            echo '<tbody>';
-
-            do_action( 'cannabiz_customer_dashboard_loyalty_points_table_tbody_top' );
-
-            echo '<tr><td><strong>' . esc_attr__( 'Loyalty Points', 'cannabiz-rewards' ) . '</strong></td><td>' . esc_attr( $loyalty_points ) . '</td></tr>';
-            echo $redeem_points;
-
-            do_action( 'cannabiz_customer_dashboard_loyalty_points_table_tbody_bottom' );
-
-            echo '</tbody>';
-            echo '</table>';
-
-            do_action( 'cannabiz_customer_dashboard_loyalty_points_table_after' );
-
         }
 
         /**
@@ -163,13 +148,12 @@ function cannabiz_rewards_dashboard_shortcode() {
          */
 
         // Get all customer orders.
-        $customer_orders = get_posts( array(
+        $customer_orders = get_posts( [
             'numberposts' => -1,
-            'meta_key'    => '_customer_user',
+            'meta_key'    => 'wpd_order_customer_id',
             'meta_value'  => $user_id,
-            'post_type'   => wc_get_order_types(),
-            'post_status' => array_keys( wc_get_order_statuses() ),
-        ) );
+            'post_type'   => 'wpd_orders',
+        ] );
 
         /**
          * Add coupon codes to CannaBiz Rewards Dashboard
@@ -188,13 +172,20 @@ function cannabiz_rewards_dashboard_shortcode() {
                 // Get coupon data.
                 $coupon = new WC_Coupon( $coupon_added );
                 //$coupon_post = get_post( $coupon->get_id() );
-                $coupon_data = array(
-                    'id'          => $coupon->get_id(),
-                    'usage_limit' => ( ! empty( $coupon->get_usage_limit() ) ) ? $coupon->get_usage_limit() : null,
-                    'usage_count' => (int) $coupon->get_usage_count(),
-                    'amount'      => wc_format_decimal( $coupon->get_amount(), 2 ),
-                );
-                
+                $coupon_data = [
+                    'id'          => $customer_coupon->ID,
+                    'type'        => get_post_meta( $customer_coupon->ID, 'wpd_coupon_type', true ),
+                    'usage_limit' => get_post_meta( $customer_coupon->ID, 'wpd_coupon_usage_limit', true ),
+                    'usage_count' => get_post_meta( $customer_coupon->ID, 'wpd_coupon_usage_count', true ),
+                    'amount'      => get_post_meta( $customer_coupon->ID, 'wpd_coupon_amount', true ),
+                ];
+
+                if ( 'Flat Rate' === $coupon_data['type'] ) {
+                    $type = '$' . $coupon_data['amount'] . ' ' . esc_attr__( 'off', 'cannabiz-rewards' );
+                } else {
+                    $type = $coupon_data['amount'] . '% ' . esc_attr__( 'off', 'cannabiz-rewards' );
+                }
+
                 // How many uses are left for this coupon?
                 $usage_left = $coupon_data['usage_limit'] - $coupon_data['usage_count'];
 
@@ -207,7 +198,7 @@ function cannabiz_rewards_dashboard_shortcode() {
                     $coupon_class     = ' class="cannabiz-rewards-inactive-coupon" ';
                 }
 
-                $coupon_codes .= '<tr><td ' . $coupon_class . '><strong>' . $coupon_added . '</strong> - ' . wc_price( $coupon_data['amount'] ) . '</td><td>' . $is_coupon_active . '</td></tr>';
+                $coupon_codes .= '<tr><td ' . $coupon_class . '><strong>' . get_post_meta( $customer_coupon->ID, 'wpd_coupon_amount', true ) . '</strong> - ' . $type . '</td><td>' . $is_coupon_active . '</td></tr>';
             }
         }
 
@@ -253,6 +244,30 @@ function cannabiz_rewards_dashboard_shortcode() {
             echo '</table>';
 
             do_action( 'cannabiz_customer_dashboard_rewards_card_table_after' );
+
+        }
+
+        // Display lotalty points if activated in the admin settings.
+        if ( 'on' == cannabiz_loyalty_points_activate() ) {
+            // Table loyalty points.
+            echo '<h4 class="cannabiz-rewards-loyalty-points">' . esc_attr__( 'My Loyalty Points', 'cannabiz-rewards' ) . '</h4>';
+
+            do_action( 'cannabiz_customer_dashboard_loyalty_points_table_before' );
+
+            echo '<table class="cannabiz-rewards-dashboard">';
+            echo '<tbody>';
+
+            do_action( 'cannabiz_customer_dashboard_loyalty_points_table_tbody_top' );
+
+            echo '<tr><td><strong>' . esc_attr__( 'Loyalty Points', 'cannabiz-rewards' ) . '</strong></td><td>' . esc_attr( $loyalty_points ) . '</td></tr>';
+            echo $redeem_points;
+
+            do_action( 'cannabiz_customer_dashboard_loyalty_points_table_tbody_bottom' );
+
+            echo '</tbody>';
+            echo '</table>';
+
+            do_action( 'cannabiz_customer_dashboard_loyalty_points_table_after' );
 
         }
 

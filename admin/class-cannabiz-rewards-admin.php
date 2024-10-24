@@ -5,9 +5,9 @@
  *
  * @package    CannaBiz_Rewards
  * @subpackage CannaBiz_Rewards/admin
- * @author     CannaBiz Software <hello@cannabiz.pro>
+ * @author     CannaBiz Software <contact@cannabizsoftware.com>
  * @license    GPL-2.0+ http://www.gnu.org/licenses/gpl-2.0.txt
- * @link       https://cannabiz.pro
+ * @link       https://cannabizsoftware.com
  * @since      1.0.0
  */
 
@@ -19,9 +19,9 @@
  *
  * @package    CannaBiz_Rewards
  * @subpackage CannaBiz_Rewards/admin
- * @author     CannaBiz Software <hello@cannabiz.pro>
+ * @author     CannaBiz Software <contact@cannabizsoftware.com>
  * @license    GPL-2.0+ http://www.gnu.org/licenses/gpl-2.0.txt
- * @link       https://cannabiz.pro
+ * @link       https://cannabizsoftware.com
  * @since      1.0.0
  */
 class CannaBiz_Rewards_Admin {
@@ -67,7 +67,7 @@ class CannaBiz_Rewards_Admin {
      */
     public function enqueue_styles() {
         // CSS - Admin.
-        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/cannabiz-rewards-admin.min.css', array(), $this->version, 'all' );
+        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/cannabiz-rewards-admin.min.css', [], $this->version, 'all' );
     }
 
     /**
@@ -78,7 +78,7 @@ class CannaBiz_Rewards_Admin {
      */
     public function enqueue_scripts() {
         // JS - Admin.
-        wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/cannabiz-rewards-admin.js', array( 'jquery' ), $this->version, false );
+        wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/cannabiz-rewards-admin.js', [ 'jquery' ], $this->version, false );
     }
 
 }
@@ -92,12 +92,12 @@ class CannaBiz_Rewards_Admin {
  */
 function cannabiz_rewards_toolbar_menu_item( $menu ) {
     // Add Settings.
-    $menu[] = array(
+    $menu[] = [
         'id'     => 'cannabiz_rewards',
         'title'  => esc_attr__( 'Rewards', 'cannabiz-rewards' ),
         'href'   => admin_url() . 'admin.php?page=rewards',
         'parent' => 'wp_dispensary'
-    );
+    ];
 
     return $menu;
 }

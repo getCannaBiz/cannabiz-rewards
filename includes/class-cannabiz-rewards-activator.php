@@ -5,9 +5,9 @@
  *
  * @package    CannaBiz_Rewards
  * @subpackage CannaBiz_Rewards/includes
- * @author     CannaBiz Software <hello@cannabiz.pro>
+ * @author     CannaBiz Software <contact@cannabizsoftware.com>
  * @license    GPL-2.0+ http://www.gnu.org/licenses/gpl-2.0.txt
- * @link       https://cannabiz.pro
+ * @link       https://cannabizsoftware.com
  * @since      1.0.0
  */
 
@@ -18,9 +18,9 @@
  *
  * @package    CannaBiz_Rewards
  * @subpackage CannaBiz_Rewards/includes
- * @author     CannaBiz Software <hello@cannabiz.pro>
+ * @author     CannaBiz Software <contact@cannabizsoftware.com>
  * @license    GPL-2.0+ http://www.gnu.org/licenses/gpl-2.0.txt
- * @link       https://cannabiz.pro
+ * @link       https://cannabizsoftware.com
  * @since      1.0.0
  */
 class CannaBiz_Rewards_Activator {

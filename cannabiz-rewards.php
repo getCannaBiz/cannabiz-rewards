@@ -4,18 +4,18 @@
  * The plugin bootstrap file
  *
  * @package CannaBiz_Rewards
- * @author  CannaBiz Software <hello@cannabiz.pro>
+ * @author  CannaBiz Software <contact@cannabizsoftware.com>
  * @license GPL-2.0+ http://www.gnu.org/licenses/gpl-2.0.txt
- * @link    https://cannabiz.pro
+ * @link    https://cannabizsoftware.com
  * @since   1.0.0
  *
  * @wordpress-plugin
  * Plugin Name:       CannaBiz Rewards
- * Plugin URI:        https://cannabiz.pro/features/dispensary-loyalty-and-rewards/
+ * Plugin URI:        https://cannabizsoftware.com/features/dispensary-loyalty-and-rewards/
  * Description:       Dispensary loyalty and rewards program
  * Version:           1.0.0
  * Author:            CannaBiz
- * Author URI:        https://cannabiz.pro
+ * Author URI:        https://cannabizsoftware.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       cannabiz-rewards

@@ -8,9 +8,9 @@
  *
  * @package    CannaBiz_Rewards
  * @subpackage CannaBiz_Rewards/includes
- * @author     CannaBiz Software <hello@cannabiz.pro>
+ * @author     CannaBiz Software <contact@cannabizsoftware.com>
  * @license    GPL-2.0+ http://www.gnu.org/licenses/gpl-2.0.txt
- * @link       https://cannabiz.pro
+ * @link       https://cannabizsoftware.com
  * @since      1.0.0
  */
 
@@ -25,9 +25,9 @@
  *
  * @package    CannaBiz_Rewards
  * @subpackage CannaBiz_Rewards/includes
- * @author     CannaBiz Software <hello@cannabiz.pro>
+ * @author     CannaBiz Software <contact@cannabizsoftware.com>
  * @license    GPL-2.0+ http://www.gnu.org/licenses/gpl-2.0.txt
- * @link       https://cannabiz.pro
+ * @link       https://cannabizsoftware.com
  * @since      1.0.0
  */
 class CannaBiz_Rewards {
@@ -141,6 +141,16 @@ class CannaBiz_Rewards {
          * The file responsible for defining all user fields.
          */
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/cannabiz-rewards-user-fields.php';
+
+        /**
+         * The file responsible for defining the earning rewards functionality.
+         */
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/cannabiz-rewards-earning-rewards.php';
+
+        /**
+         * The file responsible for defining the user shortcode.
+         */
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/cannabiz-rewards-user-shortcode.php';
 
         /**
          * The file responsible for defining the ways that a customer can earn

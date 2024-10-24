@@ -1,4 +1,10 @@
-/**
- * All of the CSS for your public-facing functionality should be
- * included in this file.
- */
+.cannabiz-rewards-dashboard tbody tr {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #ccc;
+}
+
+.cannabiz-rewards-dashboard tbody tr td {
+    padding: 12px 0;
+}

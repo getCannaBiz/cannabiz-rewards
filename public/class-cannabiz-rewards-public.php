@@ -5,9 +5,9 @@
  *
  * @package    CannaBiz_Rewards
  * @subpackage CannaBiz_Rewards/admin
- * @author     CannaBiz Software <hello@cannabiz.pro>
+ * @author     CannaBiz Software <contact@cannabizsoftware.com>
  * @license    GPL-2.0+ http://www.gnu.org/licenses/gpl-2.0.txt
- * @link       https://cannabiz.pro
+ * @link       https://cannabizsoftware.com
  * @since      1.0.0
  */
 
@@ -19,9 +19,9 @@
  *
  * @package    CannaBiz_Rewards
  * @subpackage CannaBiz_Rewards/admin
- * @author     CannaBiz Software <hello@cannabiz.pro>
+ * @author     CannaBiz Software <contact@cannabizsoftware.com>
  * @license    GPL-2.0+ http://www.gnu.org/licenses/gpl-2.0.txt
- * @link       https://cannabiz.pro
+ * @link       https://cannabizsoftware.com
  * @since      1.0.0
  */
 class CannaBiz_Rewards_Public {
@@ -55,7 +55,7 @@ class CannaBiz_Rewards_Public {
     public function __construct( $_plugin_name, $_version ) {
 
         $this->plugin_name = $_plugin_name;
-        $this->version = $_version;
+        $this->version     = $_version;
 
     }
 
@@ -67,7 +67,7 @@ class CannaBiz_Rewards_Public {
      */
     public function enqueue_styles() {
         // CSS - Public.
-        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/cannabiz-rewards-public.css', array(), $this->version, 'all' );
+        wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/cannabiz-rewards-public.css', [], $this->version, 'all' );
     }
 
     /**
@@ -78,7 +78,7 @@ class CannaBiz_Rewards_Public {
      */
     public function enqueue_scripts() {
         // JS - Public.
-        wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/cannabiz-rewards-public.js', array( 'jquery' ), $this->version, false );
+        wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/cannabiz-rewards-public.js', [ 'jquery' ], $this->version, false );
 
     }
 

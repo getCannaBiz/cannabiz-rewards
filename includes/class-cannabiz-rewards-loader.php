@@ -5,9 +5,9 @@
  *
  * @package    CannaBiz_Rewards
  * @subpackage CannaBiz_Rewards/includes
- * @author     CannaBiz Software <hello@cannabiz.pro>
+ * @author     CannaBiz Software <contact@cannabizsoftware.com>
  * @license    GPL-2.0+ http://www.gnu.org/licenses/gpl-2.0.txt
- * @link       https://cannabiz.pro
+ * @link       https://cannabizsoftware.com
  * @since      1.0.0
  */
 
@@ -20,9 +20,9 @@
  *
  * @package    CannaBiz_Rewards
  * @subpackage CannaBiz_Rewards/includes
- * @author     CannaBiz Software <hello@cannabiz.pro>
+ * @author     CannaBiz Software <contact@cannabizsoftware.com>
  * @license    GPL-2.0+ http://www.gnu.org/licenses/gpl-2.0.txt
- * @link       https://cannabiz.pro
+ * @link       https://cannabizsoftware.com
  * @since      1.0.0
  */
 class CannaBiz_Rewards_Loader {
@@ -52,8 +52,8 @@ class CannaBiz_Rewards_Loader {
      */
     public function __construct() {
 
-        $this->actions = array();
-        $this->filters = array();
+        $this->actions = [];
+        $this->filters = [];
 
     }
 
@@ -106,13 +106,13 @@ class CannaBiz_Rewards_Loader {
      */
     private function add( $hooks, $hook, $component, $callback, $priority, $accepted_args ) {
 
-        $hooks[] = array(
+        $hooks[] = [
             'hook'          => $hook,
             'component'     => $component,
             'callback'      => $callback,
             'priority'      => $priority,
             'accepted_args' => $accepted_args
-        );
+        ];
 
         return $hooks;
 
@@ -127,11 +127,11 @@ class CannaBiz_Rewards_Loader {
     public function run() {
 
         foreach ( $this->filters as $hook ) {
-            add_filter( $hook['hook'], array( $hook['component'], $hook['callback'] ), $hook['priority'], $hook['accepted_args'] );
+            add_filter( $hook['hook'], [ $hook['component'], $hook['callback'] ], $hook['priority'], $hook['accepted_args'] );
         }
 
         foreach ( $this->actions as $hook ) {
-            add_action( $hook['hook'], array( $hook['component'], $hook['callback'] ), $hook['priority'], $hook['accepted_args'] );
+            add_action( $hook['hook'], [ $hook['component'], $hook['callback'] ], $hook['priority'], $hook['accepted_args'] );
         }
 
     }
